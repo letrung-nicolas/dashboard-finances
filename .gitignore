@@ -1,0 +1,25 @@
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+.env
+.env.*
+*.log
+.DS_Store
+
+# Données bancaires : jamais dans le dépôt public.
+*.pdf
+*.csv
+*.xls
+*.xlsx
+*.ofx
+*.qfx
+*.qif
+*.sta
+*.mt940
+*.xml
+# Seules des fixtures INVENTÉES (texte) peuvent être commitées, jamais de PDF.
+!fixtures/**/*.csv
+!fixtures/**/*.ofx
+!fixtures/**/*.qif

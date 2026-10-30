@@ -1,0 +1,20 @@
+import { Route, Routes } from 'react-router-dom';
+
+function Accueil() {
+  return (
+    <main className="page">
+      <h1>Finances</h1>
+      <p className="muted">
+        Application 100 % locale : vos données restent chiffrées dans ce navigateur.
+      </p>
+    </main>
+  );
+}
+
+export function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Accueil />} />
+    </Routes>
+  );
+}
