@@ -1,0 +1,3 @@
+#!/bin/sh
+# Bloque un commit contenant IBAN FR, numéro de carte, e-mail ou fichier de données bancaires.
+exec npx --no-install tsx scripts/scan-personal-data.ts --staged

@@ -38,12 +38,16 @@ Les dossiers sont créés au fur et à mesure des phases.
 ## Commandes
 - `npm run dev` · `npm run build` · `npm run preview`
 - `npm run lint` · `npm run typecheck` · `npm test`
+- `npm run scan` : scan anti-données personnelles (IBAN FR valide, carte Luhn, e-mail, fichiers
+  PDF/Excel/CSV hors fixtures). Le hook pre-commit (`scripts/hooks`, activé par `npm install` via
+  `prepare`) lance le même scan sur l'index. Ne jamais afficher la valeur trouvée (journaux de CI
+  publics). Marqueur `scan:allow` pour une ligne justifiée en revue.
 
 ## Avancement
 Phase 1A : socle (étapes 1 à 10). PR intermédiaire vers `main` après l'étape 7, PR finale après l'étape 10.
 Branche de travail : `claude/architecture-plan-validation-htyub0`.
 - [x] 1. Socle (Vite, React, TS strict, ESLint, Vitest, CSP au build, dark mode, HashRouter)
-- [ ] 2. CI + scan anti-données personnelles + workflow Pages
+- [x] 2. CI (lint, types, tests, scan, build) + scan anti-données personnelles + workflow Pages (main uniquement)
 - [ ] 3. crypto/ (PBKDF2 : itérations stockées avec le vérificateur, mesure sur appareil lent à documenter)
 - [ ] 4. storage/ (bouton « Sauvegarder maintenant » visible + rappel après chaque import)
 - [ ] 5. domain/ (types) + connectors/
