@@ -60,3 +60,84 @@ body {
 .alerte {
   color: var(--sortie);
 }
+
+.carte {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 16px 0;
+}
+
+.carte h2 {
+  margin-top: 0;
+}
+
+label {
+  display: block;
+  margin: 12px 0;
+}
+
+input[type='password'],
+input[type='file'] {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--muted);
+  border-radius: 8px;
+}
+
+label.case {
+  display: flex;
+  align-items: flex-start;
+}
+
+label.case input {
+  margin: 4px 10px 0 0;
+}
+
+.petit {
+  font-size: 0.85rem;
+  margin: 6px 0;
+}
+
+.barre {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.barre-ligne {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.barre-ligne .btn,
+.barre-ligne .btn-secondaire {
+  margin: 0 8px 8px 0;
+}
+
+.btn-secondaire {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--muted);
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.rappel {
+  background: rgba(240, 136, 62, 0.15);
+  border-left: 4px solid var(--sortie);
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin: 8px 0 0;
+}

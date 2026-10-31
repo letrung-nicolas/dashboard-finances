@@ -67,7 +67,11 @@ Branche de travail : `claude/architecture-plan-validation-htyub0`.
 - [x] 3. crypto/ : coffre à clé de données enveloppée (itérations stockées dans l'en-tête, `rewrapVault`
   sans ré-encrypter les données), AES-GCM, page `/#/outils/crypto` de mesure. Détails : `docs/crypto.md`.
   Reste à faire par l'utilisateur : mesurer sur téléphone et Mac ancien (possible après publication).
-- [ ] 4. storage/ (bouton « Sauvegarder maintenant » visible + rappel après chaque import)
+- [x] 4. storage/ : IndexedDB chiffrée (`EncryptedStore`), migrations avec retour arrière, sauvegarde/restauration
+  vérifiée, bouton « Sauvegarder maintenant » + rappel alimenté par toute écriture, verrouillage auto 5 min
+  (`app/idleLock.ts`), écran de création/déverrouillage/restauration. Détails : `docs/storage.md`.
+  Vérifié en vrai navigateur sous la CSP (création, téléchargement, verrouillage, rechargement).
+  Reste à tester sur appareils réels : téléchargement de la sauvegarde sur iPhone/Safari.
 - [ ] 5. domain/ (types) + connectors/
 - [ ] 6. Assistant de premier lancement + réglages
 - [ ] 7. import/pdf-ca (+ mode diagnostic + export de structure anonymisé) → PR intermédiaire
