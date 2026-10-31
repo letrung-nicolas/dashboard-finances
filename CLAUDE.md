@@ -72,7 +72,9 @@ Branche de travail : `claude/architecture-plan-validation-htyub0`.
   (`app/idleLock.ts`), écran de création/déverrouillage/restauration. Détails : `docs/storage.md`.
   Vérifié en vrai navigateur sous la CSP (création, téléchargement, verrouillage, rechargement).
   Reste à tester sur appareils réels : téléchargement de la sauvegarde sur iPhone/Safari.
-- [ ] 5. domain/ (types) + connectors/
+- [x] 5. domain/ (types, montants en centimes, dates ISO, libellés, masquage) + connectors/ (interface, connecteur
+  « fichier », identifiants HMAC stables avec rang : jamais de dédoublonnage dans un même fichier). Détails :
+  `docs/connectors.md`. Le secret d'identifiants (32 octets) sera créé à l'étape 6.
 - [ ] 6. Assistant de premier lancement + réglages
 - [ ] 7. import/pdf-ca (+ mode diagnostic + export de structure anonymisé) → PR intermédiaire
 - [ ] 8. import/csv, ofx, dedupe

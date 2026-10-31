@@ -31,3 +31,12 @@ export function base64ToBytes(base64: string): Uint8Array {
   for (let i = 0; i < binary.length; i++) out[i] = binary.charCodeAt(i);
   return out;
 }
+
+export function bytesToHex(bytes: Uint8Array): string {
+  let out = '';
+  for (let i = 0; i < bytes.length; i++) {
+    const h = bytes[i].toString(16);
+    out += h.length === 1 ? '0' + h : h;
+  }
+  return out;
+}
