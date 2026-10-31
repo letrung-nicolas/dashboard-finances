@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import { CryptoBench } from '../ui/CryptoBench';
 
 function Accueil() {
   return (
@@ -15,6 +16,7 @@ export function App() {
   return (
     <Routes>
       <Route path="/" element={<Accueil />} />
+      <Route path="/outils/crypto" element={<CryptoBench />} />
     </Routes>
   );
 }

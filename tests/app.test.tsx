@@ -13,4 +13,14 @@ describe('App', () => {
     expect(html).toContain('Finances');
     expect(html).toContain('100 % locale');
   });
+
+  it("affiche la page de mesure de vitesse du chiffrement", () => {
+    const html = renderToString(
+      <StaticRouter location="/outils/crypto">
+        <App />
+      </StaticRouter>,
+    );
+    expect(html).toContain("Vitesse du chiffrement");
+    expect(html).toContain("Mesurer");
+  });
 });

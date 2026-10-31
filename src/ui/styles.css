@@ -40,3 +40,23 @@ body {
 .muted {
   color: var(--muted);
 }
+
+.btn {
+  background: var(--entree);
+  color: #0b1f10;
+  border: 0;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.alerte {
+  color: var(--sortie);
+}

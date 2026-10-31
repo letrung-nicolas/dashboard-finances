@@ -19,6 +19,22 @@ pour analyser des relevés bancaires. Doit fonctionner sur téléphone et sur un
 - Tout changement du format de stockage ou de sauvegarde = migration versionnée + test,
   et relecture des sauvegardes des versions précédentes.
 
+## Règle permanente : actions à faire par l'utilisateur
+L'utilisateur est débutant. Chaque fois qu'il doit faire ou vérifier quelque chose lui-même, donner
+EN BLOC DE CODE prêt à copier-coller :
+- une phrase d'explication du pourquoi ;
+- les valeurs à tester et les liens directs COMPLETS vers les pages GitHub concernées ;
+- le message à renvoyer pour le cas « tout va bien » ET celui pour le cas « ça échoue »,
+  déjà rédigés (sans demander de coller de données réelles : noms de fichiers, étapes, statuts seulement).
+
+Liens utiles (dépôt public, aucune donnée personnelle) :
+- Actions (CI) : https://github.com/letrung-nicolas/dashboard-finances/actions
+- Comparer la branche à main / créer la PR :
+  https://github.com/letrung-nicolas/dashboard-finances/compare/main...claude/architecture-plan-validation-htyub0
+- Réglage Pages : https://github.com/letrung-nicolas/dashboard-finances/settings/pages
+- E-mail privé GitHub : https://github.com/settings/emails
+- Site publié (après fusion dans main) : https://letrung-nicolas.github.io/dashboard-finances/
+
 ## Architecture (src/)
 app/ (shell, routage, verrouillage) · crypto/ · storage/ · connectors/ · import/ (pdf-ca, csv, ofx,
 xlsx, qif, dedupe) · categorize/ · domain/ (types, KPI, enveloppes, projections, alertes : fonctions
@@ -48,7 +64,9 @@ Phase 1A : socle (étapes 1 à 10). PR intermédiaire vers `main` après l'étap
 Branche de travail : `claude/architecture-plan-validation-htyub0`.
 - [x] 1. Socle (Vite, React, TS strict, ESLint, Vitest, CSP au build, dark mode, HashRouter)
 - [x] 2. CI (lint, types, tests, scan, build) + scan anti-données personnelles + workflow Pages (main uniquement)
-- [ ] 3. crypto/ (PBKDF2 : itérations stockées avec le vérificateur, mesure sur appareil lent à documenter)
+- [x] 3. crypto/ : coffre à clé de données enveloppée (itérations stockées dans l'en-tête, `rewrapVault`
+  sans ré-encrypter les données), AES-GCM, page `/#/outils/crypto` de mesure. Détails : `docs/crypto.md`.
+  Reste à faire par l'utilisateur : mesurer sur téléphone et Mac ancien (possible après publication).
 - [ ] 4. storage/ (bouton « Sauvegarder maintenant » visible + rappel après chaque import)
 - [ ] 5. domain/ (types) + connectors/
 - [ ] 6. Assistant de premier lancement + réglages

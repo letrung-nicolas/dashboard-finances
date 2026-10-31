@@ -1,0 +1,19 @@
+{
+  "description": "Fixture inventée du format de coffre. Ne pas régénérer.",
+  "password": "mot-de-passe-de-test-v1",
+  "header": {
+    "version": 1,
+    "kdf": "PBKDF2-SHA256",
+    "iterations": 600000,
+    "salt": "7ETc36x3lNMHakvieqTuhg==",
+    "wrappedKey": "Ab6Xou9xmvpK5VJM4MP9SqeaG77/DcswwFjamNHxTpCG2Kg/AdDS/0DUEX4YbQ0h/AShaXSxocHDV8XrGQ=="
+  },
+  "sample": {
+    "aad": "enregistrement:exemple",
+    "plaintext": {
+      "libelle": "Opération de test",
+      "centimes": -1234
+    },
+    "envelope": "AUIYz9xh/FCq2Y10gSe8s3om71JEIMfP6Hz110TthiSjI6l4mfwWneuBoVG2ZC6AqbVXUxAA0KHvxODe/cQ73K0ZXfMHZbWpk/+xZMr3"
+  }
+}
