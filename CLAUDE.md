@@ -50,6 +50,10 @@ Les dossiers sont créés au fur et à mesure des phases.
 - Dédoublonnage : jamais à l'intérieur d'un même fichier ; uniquement entre fichiers qui se
   chevauchent ; cas incertains « probable » conservés dans les totaux jusqu'à décision.
 - Un commit par étape ; mettre à jour « Avancement » après chaque étape.
+- Caractères spéciaux dans le code (espaces insécables, signe moins, €, ›) : toujours en séquences `\uXXXX`.
+  ESLint refuse les espaces irréguliers littéraux, et les outils d'écriture les convertissent parfois.
+- Après chaque écriture de fichier source, relancer `npm run lint` (cela attrape ce cas).
+- Les identifiants d'enregistrements sont lisibles sur le disque : toujours opaques (HMAC, jamais un libellé).
 
 ## Commandes
 - `npm run dev` · `npm run build` · `npm run preview`
@@ -75,7 +79,9 @@ Branche de travail : `claude/architecture-plan-validation-htyub0`.
 - [x] 5. domain/ (types, montants en centimes, dates ISO, libellés, masquage) + connectors/ (interface, connecteur
   « fichier », identifiants HMAC stables avec rang : jamais de dédoublonnage dans un même fichier). Détails :
   `docs/connectors.md`. Le secret d'identifiants (32 octets) sera créé à l'étape 6.
-- [ ] 6. Assistant de premier lancement + réglages
+- [x] 6. Assistant de premier lancement (5 étapes) + page Réglages : revenu, jour de versement, découvert et taux,
+  crédits, 3 enveloppes, mots à masquer ; secret d'identifiants créé au premier lancement ; stockés chiffrés.
+  Vérifié en vrai navigateur à 375 px sous la CSP. Détails : `docs/settings.md`. L'IBAN complet n'est jamais demandé.
 - [ ] 7. import/pdf-ca (+ mode diagnostic + export de structure anonymisé) → PR intermédiaire
 - [ ] 8. import/csv, ofx, dedupe
 - [ ] 9. categorize/

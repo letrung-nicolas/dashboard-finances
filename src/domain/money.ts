@@ -54,3 +54,10 @@ export function formatCents(cents: Cents, options: { sign?: boolean } = {}): str
 export function roundCents(value: number): Cents {
   return Math.round(value);
 }
+
+/** Montant pour un champ de saisie : « 2500,00 » (virgule, sans séparateur de milliers). */
+export function formatCentsPlain(cents: Cents): string {
+  const abs = Math.abs(cents);
+  const dec = abs % 100;
+  return (cents < 0 ? '-' : '') + Math.floor(abs / 100) + ',' + (dec < 10 ? '0' + dec : String(dec));
+}

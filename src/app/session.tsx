@@ -3,13 +3,21 @@ import type { ReactNode } from 'react';
 import { CryptoError } from '../crypto';
 import { backupFileName, EncryptedStore, requestPersistence, StorageError } from '../storage';
 import type { BackupState } from '../storage';
+import type { Settings } from '../domain';
 import { downloadTextFile } from '../ui/download';
 import { IDLE_TIMEOUT_MS, IdleTimer } from './idleLock';
+import { loadSettings, saveSettings } from './settingsService';
 
 export type SessionStatus = 'loading' | 'no-vault' | 'locked' | 'unlocked' | 'error';
+export type SettingsState = 'loading' | 'missing' | 'ready';
 
 export interface Session {
   status: SessionStatus;
+  /** Réglages chiffrés ; `missing` = premier lancement (assistant à afficher). */
+  settings: Settings | null;
+  settingsState: SettingsState;
+  /** Enregistre les réglages (chiffrés) et met à jour l'affichage. */
+  persistSettings(next: Settings): Promise<void>;
   /** Disponible seulement quand le coffre est déverrouillé. */
   store: EncryptedStore | null;
   backup: BackupState;
@@ -49,6 +57,8 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   const [status, setStatus] = useState<SessionStatus>('loading');
   const [error, setError] = useState<string | null>(null);
   const [backup, setBackup] = useState<BackupState>(EMPTY_BACKUP);
+  const [settings, setSettings] = useState<Settings | null>(null);
+  const [settingsState, setSettingsState] = useState<SettingsState>('loading');
   const storeRef = useRef<EncryptedStore | null>(null);
   const [store, setStore] = useState<EncryptedStore | null>(null);
   const idleRef = useRef<IdleTimer | null>(null);
@@ -104,12 +114,34 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     };
   }, [status, lock]);
 
+  // Verrouillé : plus aucun réglage en mémoire.
+  useEffect(() => {
+    if (status !== 'unlocked') {
+      setSettings(null);
+      setSettingsState('loading');
+    }
+  }, [status]);
+
   const afterUnlock = useCallback((s: EncryptedStore) => {
     setBackup(s.getBackupState());
     setStore(s);
     setError(null);
+    setSettingsState('loading');
+    loadSettings(s)
+      .then((loaded) => {
+        setSettings(loaded);
+        setSettingsState(loaded ? 'ready' : 'missing');
+      })
+      .catch((e) => setError(messageFor(e)));
     setStatus('unlocked');
     void requestPersistence();
+  }, []);
+
+  const persistSettings = useCallback(async (next: Settings) => {
+    const s = requireStore();
+    await saveSettings(s, next);
+    setSettings(next);
+    setSettingsState('ready');
   }, []);
 
   const requireStore = (): EncryptedStore => {
@@ -152,8 +184,21 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value = useMemo<Session>(
-    () => ({ status, store, backup, error, createVault, unlock, lock, restore, backupNow }),
-    [status, store, backup, error, createVault, unlock, lock, restore, backupNow],
+    () => ({
+      status,
+      settings,
+      settingsState,
+      persistSettings,
+      store,
+      backup,
+      error,
+      createVault,
+      unlock,
+      lock,
+      restore,
+      backupNow,
+    }),
+    [status, settings, settingsState, persistSettings, store, backup, error, createVault, unlock, lock, restore, backupNow],
   );
 
   return <SessionContext.Provider value={value}>{children}</SessionContext.Provider>;

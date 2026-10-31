@@ -141,3 +141,26 @@ label.case input {
   border-radius: 6px;
   margin: 8px 0 0;
 }
+
+input[type='text'],
+textarea {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--muted);
+  border-radius: 8px;
+}
+
+.nav a {
+  color: var(--entree);
+  margin-right: 16px;
+}
+
+.nav {
+  margin-bottom: 8px;
+}

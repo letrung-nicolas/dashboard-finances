@@ -15,3 +15,4 @@ export type { UnlockedVault, VaultHeader } from './vault';
 export { isCryptoAvailable } from './webcrypto';
 export { hmacSha256Hex, sha256Hex } from './hash';
 export { bytesToHex } from './encoding';
+export { randomBytes } from './webcrypto';
